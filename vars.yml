@@ -1,1 +1,3 @@
 user_name: ansible
+#service_name: httpd
+service_name: tomcat

@@ -1,22 +1,9 @@
 - hosts: all
   become: yes
   become_user: root
+  vars_files:
+    - vars.yml
   tasks:
-    - yum: name=httpd state=latest
-    - name: httpd start
-      service: name=httpd stat=start
-      ignore_errors: True
-    - name: httpd start (systemd)
-      systemd: 
-        name: httpd
-        state: started
-      ignore_errors: True
-    - name: httpd.conf copy
-      copy: src=test.py dest=/var/www/cgi-bin/
-#    - name: httpd start (shell)
-#      shell: systemctl start httpd
-#    - user: name=piyo
-#    - name: copy
-#      copy: src=/home/ansible/test dest=/home/ansible/test2
-#    - name: cat
-#      shell: cat /etc/redhat-release
+    - include: task_java8_install.yml
+    - include: task_tomcat_install.yml
+    - include: task_httpd_install.yml

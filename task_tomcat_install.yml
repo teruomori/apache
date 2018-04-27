@@ -1,0 +1,10 @@
+- name: tomcat install
+  yum: name=tomcat state=latest
+- name: tomcat start
+  service: name=tomcat stat=restarted
+  ignore_errors: True
+- name: tomcat start (systemd)
+  systemd:
+    name: tomcat
+    state: restarted
+  ignore_errors: True
